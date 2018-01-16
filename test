@@ -1,0 +1,3 @@
+a.ProblemNo, a.ProblemDescribe, a.ResponsiblePerson, a.RelationPerson, a.RequireSolveDate,
+a.ProblemProgress, a.ReportPerson, a.ReportDate, a.PlanSolveDate, a.SolveDate, a.SolveMethod,
+a.SolvePerson, a.TaskID
