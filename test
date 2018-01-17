@@ -1,3 +1,9 @@
-a.ProblemNo, a.ProblemDescribe, a.ResponsiblePerson, a.RelationPerson, a.RequireSolveDate,
-a.ProblemProgress, a.ReportPerson, a.ReportDate, a.PlanSolveDate, a.SolveDate, a.SolveMethod,
-a.SolvePerson, a.TaskID
+// INTRODUCTION
+//
+// Well, hello there!
+//
+// Don't be scared! :-)
+
+// This is Describe.
+
+// GLOBALIZATION NOTE: Save this file using UTF-8 Encoding.
