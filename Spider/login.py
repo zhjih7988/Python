@@ -3,8 +3,8 @@
 import requests
 url = 'http://cs.zaza666.com/Center/login.html?flag=hidden'
 data = {
-    "telephone" : "free",
-    "password" : "surfree33333",
+    "telephone" : "",
+    "password" : "",
     "action" : "login"
 }
 try:
