@@ -22,5 +22,6 @@ html = html.text
 active_url = html.split('account:')[1].strip()
 driver.get(active_url)
 time.sleep(1)
+
 driver.delete_all_cookies()
 time.sleep(1)
