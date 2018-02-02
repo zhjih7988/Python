@@ -1,22 +1,18 @@
 # id="s4p0" --> s4p72
 import re
-str = '''<li id="li4_57"><a href="thunder://QUFodHRwOi8vZGwxMzkuODBzLmltOjkyMC8xNzA5LyU1QiVFNiVCNSVCNyVFOCVCNCVCQyVFNyU4RSU4QiU1RCVFNyVBQyVBQzgwNCVFOSU5QiU4Ni8lNUIlRTYlQjUlQjclRTglQjQlQkMlRTclOEUlOEIlNUQlRTclQUMlQUM4MDQlRTklOUIlODZfYmQubXA0Wlo=" target="_self">海贼王-第804集.mp4</a></li>
-<li id="li4_58"><a href="thunder://QUFodHRwOi8vZGwxMzkuODBzLmltOjkyMC8xNzA5LyU1QiVFNiVCNSVCNyVFOCVCNCVCQyVFNyU4RSU4QiU1RCVFNyVBQyVBQzgwNSVFOSU5QiU4Ni8lNUIlRTYlQjUlQjclRTglQjQlQkMlRTclOEUlOEIlNUQlRTclQUMlQUM4MDUlRTklOUIlODZfYmQubXA0Wlo=" target="_self">海贼王-第805集.mp4</a></li>
-<li id="li4_59"><a href="thunder://QUFodHRwOi8vZGwxNDMuODBzLmltOjkyMC8xNzA5LyU1QiVFNiVCNSVCNyVFOCVCNCVCQyVFNyU4RSU4QiU1RCVFNyVBQyVBQzgwNiVFOSU5QiU4Ni8lNUIlRTYlQjUlQjclRTglQjQlQkMlRTclOEUlOEIlNUQlRTclQUMlQUM4MDYlRTklOUIlODZfYmQubXA0Wlo=" target="_self">海贼王-第806集.mp4</a></li>
-<li id="li4_60"><a href="thunder://QUFodHRwOi8vZGwxNDYuODBzLmltOjkyMC8xNzEwLyU1QiVFNiVCNSVCNyVFOCVCNCVCQyVFNyU4RSU4QiU1RCVFNyVBQyVBQzgwNyVFOSU5QiU4Ni8lNUIlRTYlQjUlQjclRTglQjQlQkMlRTclOEUlOEIlNUQlRTclQUMlQUM4MDclRTklOUIlODZfYmQubXA0Wlo=" target="_self">海贼王-第807集.mp4</a></li>
-<li id="li4_61"><a href="thunder://QUFodHRwOi8vZGwxNDYuODBzLmltOjkyMC8xNzEwLyU1QiVFNiVCNSVCNyVFOCVCNCVCQyVFNyU4RSU4QiU1RCVFNyVBQyVBQzgwOCVFOSU5QiU4Ni8lNUIlRTYlQjUlQjclRTglQjQlQkMlRTclOEUlOEIlNUQlRTclQUMlQUM4MDglRTklOUIlODZfYmQubXA0Wlo=" target="_self">海贼王-第808集.mp4</a></li>
-<li id="li4_62"><a href="thunder://QUFodHRwOi8vZGwxNDguODBzLmltOjkyMC8xNzEwLyU1QiVFNiVCNSVCNyVFOCVCNCVCQyVFNyU4RSU4QiU1RCVFNyVBQyVBQzgwOSVFOSU5QiU4Ni8lNUIlRTYlQjUlQjclRTglQjQlQkMlRTclOEUlOEIlNUQlRTclQUMlQUM4MDklRTklOUIlODZfYmQubXA0Wlo=" target="_self">海贼王-第809集.mp4</a></li>
-<li id="li4_63"><a href="thunder://QUFodHRwOi8vZGwxNDguODBzLmltOjkyMC8xNzEwLyU1QiVFNiVCNSVCNyVFOCVCNCVCQyVFNyU4RSU4QiU1RCVFNyVBQyVBQzgxMCVFOSU5QiU4Ni8lNUIlRTYlQjUlQjclRTglQjQlQkMlRTclOEUlOEIlNUQlRTclQUMlQUM4MTAlRTklOUIlODZfYmQubXA0Wlo=" target="_self">海贼王-第810集.mp4</a></li>
-<li id="li4_64"><a href="thunder://QUFodHRwOi8vZGwxNDcuODBzLmltOjkyMC8xNzEwLyU1QiVFNiVCNSVCNyVFOCVCNCVCQyVFNyU4RSU4QiU1RCVFNyVBQyVBQzgxMSVFOSU5QiU4Ni8lNUIlRTYlQjUlQjclRTglQjQlQkMlRTclOEUlOEIlNUQlRTclQUMlQUM4MTElRTklOUIlODZfYmQubXA0Wlo=" target="_self">海贼王-第811集.mp4</a></li>
-<li id="li4_65"><a href="thunder://QUFodHRwOi8vZGw5MS44MHMuY29tLmNvOjk5OS8xNzExLyU1QiVFNiVCNSVCNyVFOCVCNCVCQyVFNyU4RSU4QiU1RCVFNyVBQyVBQzgxMiVFOSU5QiU4Ni8lNUIlRTYlQjUlQjclRTglQjQlQkMlRTclOEUlOEIlNUQlRTclQUMlQUM4MTIlRTklOUIlODZfYmQubXA0Wlo=" target="_self">海贼王-第812集.mp4</a></li>
-<li id="li4_66"><a href="thunder://QUFodHRwOi8vZGw5MS44MHMuY29tLmNvOjk5OS8xNzExLyU1QiVFNiVCNSVCNyVFOCVCNCVCQyVFNyU4RSU4QiU1RCVFNyVBQyVBQzgxMyVFOSU5QiU4Ni8lNUIlRTYlQjUlQjclRTglQjQlQkMlRTclOEUlOEIlNUQlRTclQUMlQUM4MTMlRTklOUIlODZfYmQubXA0Wlo=" target="_self">海贼王-第813集.mp4</a></li>
-<li id="li4_67"><a href="thunder://QUFodHRwOi8vZGw5My44MHMuY29tLmNvOjk5OS8xNzExLyU1QiVFNiVCNSVCNyVFOCVCNCVCQyVFNyU4RSU4QiU1RCVFNyVBQyVBQzgxNCVFOSU5QiU4Ni8lNUIlRTYlQjUlQjclRTglQjQlQkMlRTclOEUlOEIlNUQlRTclQUMlQUM4MTQlRTklOUIlODZfYmQubXA0Wlo=" target="_self">海贼王-第814集.mp4</a></li>
-<li id="li4_68"><a href="thunder://QUFodHRwOi8vZGw5Mi44MHMuY29tLmNvOjk5OS8xNzExLyU1QiVFNiVCNSVCNyVFOCVCNCVCQyVFNyU4RSU4QiU1RCVFNyVBQyVBQzgxNSVFOSU5QiU4Ni8lNUIlRTYlQjUlQjclRTglQjQlQkMlRTclOEUlOEIlNUQlRTclQUMlQUM4MTUlRTklOUIlODZfYmQubXA0Wlo=" target="_self">海贼王-第815集.mp4</a></li>
-<li id="li4_69"><a href="thunder://QUFodHRwOi8vZGw5Ni44MHMuY29tLmNvOjk5OS8xNzEyLyU1QiVFNiVCNSVCNyVFOCVCNCVCQyVFNyU4RSU4QiU1RCVFNyVBQyVBQzgxNiVFOSU5QiU4Ni8lNUIlRTYlQjUlQjclRTglQjQlQkMlRTclOEUlOEIlNUQlRTclQUMlQUM4MTYlRTklOUIlODZfYmQubXA0Wlo=" target="_self">海贼王-第816集.mp4</a></li>
-<li id="li4_70"><a href="thunder://QUFodHRwOi8vZGw5Ny44MHMuY29tLmNvOjk5OS8xNzEyLyU1QiVFNiVCNSVCNyVFOCVCNCVCQyVFNyU4RSU4QiU1RCVFNyVBQyVBQzgxNyVFOSU5QiU4Ni8lNUIlRTYlQjUlQjclRTglQjQlQkMlRTclOEUlOEIlNUQlRTclQUMlQUM4MTclRTklOUIlODZfYmQubXA0Wlo=" target="_self">海贼王-第817集.mp4</a></li>
-<li id="li4_71"><a href="thunder://QUFodHRwOi8vZGw5Ny44MHMuY29tLmNvOjk5OS8xNzEyLyU1QiVFNiVCNSVCNyVFOCVCNCVCQyVFNyU4RSU4QiU1RCVFNyVBQyVBQzgxOCVFOSU5QiU4Ni8lNUIlRTYlQjUlQjclRTglQjQlQkMlRTclOEUlOEIlNUQlRTclQUMlQUM4MTglRTklOUIlODZfYmQubXA0Wlo=" target="_self">海贼王-第818集.mp4</a></li>
-<li id="li4_72"><a href="thunder://QUFodHRwOi8vZGw5Ny44MHMuY29tLmNvOjk5OS8xNzEyLyU1QiVFNiVCNSVCNyVFOCVCNCVCQyVFNyU4RSU4QiU1RCVFNyVBQyVBQzgxOSVFOSU5QiU4Ni8lNUIlRTYlQjUlQjclRTglQjQlQkMlRTclOEUlOEIlNUQlRTclQUMlQUM4MTklRTklOUIlODZfYmQubXA0Wlo=" target="_self">海贼王-第819集.mp4</a></li><script>echoDown(4);
-'''
-for i in range(1, 74):
-    s = "li4_" + i.__str__()
-    print(s)
+
+# 逐行读 
+file_object = open(r'C:\Users\Pancras\Desktop\Python\Spider\r.txt',encoding="utf-8") 
+try: 
+  for line in file_object: 
+    #print(line, end = '') 
+    for i in range(1, 74):
+        s = "li4_" + i.__str__()
+        if s in line:
+            print(line)
+            break
+        # print(s)
+finally: 
+  file_object.close() 
+
+

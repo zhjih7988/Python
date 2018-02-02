@@ -9,13 +9,19 @@ import threading
 from six import PY2
 from six import iteritems
 
-from login.config import COOKIE_FILE
-from login.logger import logger
-from login.app import bot, plugin_manager
-from login.handler import MessageObserver
-from login.messages import mk_msg
-from login.excpetions import ServerResponseEmpty, NeedRelogin
-from login.signals import bot_inited_registry
+from smart_qq_bot.config import COOKIE_FILE
+from smart_qq_bot.logger import logger
+from smart_qq_bot.app import bot, plugin_manager
+from smart_qq_bot.handler import MessageObserver
+from smart_qq_bot.messages import mk_msg
+from smart_qq_bot.excpetions import ServerResponseEmpty, NeedRelogin
+from smart_qq_bot.signals import bot_inited_registry
+
+
+def patch():
+    if PY2:
+        reload(sys)
+        sys.setdefaultencoding("utf-8")
 
 
 def clean_cookie():
@@ -26,7 +32,7 @@ def clean_cookie():
 
 def run_http_daemon(host="0.0.0.0", port=8888):
     from threading import Thread
-    from login.httpserver import run_server
+    from smart_qq_bot.httpserver import run_server
     daemon = Thread(
         target=run_server,
         kwargs={"host": host, "port": port}
@@ -36,6 +42,7 @@ def run_http_daemon(host="0.0.0.0", port=8888):
 
 
 def main_loop(no_gui=False, new_user=False, debug=False, http=False):
+    patch()
     if debug:
         logger.setLevel(logging.DEBUG)
     else:

@@ -5,9 +5,8 @@ import sys
 here = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(here)
 
-from login.logger import logger
-
-from login.main import run
+from smart_qq_bot.logger import logger
+from smart_qq_bot.main import run
 
 try:
     run()
