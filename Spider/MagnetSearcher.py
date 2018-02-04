@@ -2,21 +2,13 @@ import re
 import base64
 from urllib import parse
 from urllib import request
-import time
+import time, os
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 UBrowser/6.1.2716.5 Safari/537.36",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
 }
 
-# inputKeyWord = input("输入搜索关键词：")
-# bytesKeyWord = inputKeyWord.encode(encoding="utf-8")
-# decodeWord = base64.b64encode(bytesKeyWord)
-# keyCode = decodeWord.decode()
-# urlPart1 = "http://www.btwhat.info/search/b-"
-# urlPart2 = keyCode+"/"
-# urlPart4 = "-3.html"
-result=[]
 def strDecode(uriCode):
     a = re.sub('[+"]', '', uriCode)
     b = parse.unquote(a)
@@ -24,12 +16,16 @@ def strDecode(uriCode):
     str = c.sub('', b)
     return str
 
-def getInfo(key):
-    #页数 默认10页
+def getInfo(word):
+    bytesKeyWord = word.encode(encoding="utf-8")
+    decodeWord = base64.b64encode(bytesKeyWord)
+    keyCode = decodeWord.decode()
+
+    urlPart1 = "http://www.btwhat.info/search/b-"
+    urlPart2 = keyCode + "/"
+    urlPart4 = "-3.html"
+
     for pageNum in range(1, 2):
-        urlPart1 = "http://www.btwhat.info/search/b-"
-        urlPart2 = key + "/"
-        urlPart4 = "-3.html"
         url = urlPart1+urlPart2+str(pageNum)+urlPart4
         req = request.Request(url=url,headers=headers)
         res = request.urlopen(req)
@@ -65,26 +61,18 @@ def getInfo(key):
                 size = "".join(fileSizeList[m])
 
                 print("\r")
-                print("资源名称："+title)
+                print("资源名称：" + title)
                 print("资源类型：" + type)
                 print("资源大小：" + size)
-                print("磁力链接："+magnet)
+                print("磁力链接：" + magnet)
                 print("\r")
                 f.write(magnet + '\n')
 
-
-def Search(word):
-    bytesKeyWord = word.encode(encoding="utf-8")
-    decodeWord = base64.b64encode(bytesKeyWord)
-    keyCode = decodeWord.decode()
-    urlPart2 = keyCode + "/"
-    getInfo(urlPart2)
-
-
 if __name__ == '__main__':
-    with open('s.txt', 'r', encoding="utf-8") as f:
-        for line in f:
-            word = line.strip('\n')
-            print(word+" ...")
-            Search(word)
-
+    filename = "input.txt"
+    if os.path.exists(filename):
+        with open(filename, 'r', encoding="utf-8") as f:
+            for line in f:
+                word = line.strip('\n')
+                print(word+" ...")
+                getInfo(word)
