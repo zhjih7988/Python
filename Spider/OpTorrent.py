@@ -1,3 +1,4 @@
+# coding: utf-8
 import re
 from MyFun import SaveToHtml
 # Python的标准库linecache模块非常适合这个任务
@@ -20,9 +21,9 @@ try:
   for line in file_object:
     line_number += 1
     for i in range(0, 999):
-        '''爬取li4_0-li4_76的链接'''
+        '''爬取li4_0-li4_76的链接  最新的链接'''
         '''li2_0-li4_999  更改rang(0,999)即可'''
-        s = 'li2_' + str(i)
+        s = 'li4_' + str(i)
         if s in line:
           tmp = linecache.getline('op.html',line_number+1)
           if start:
