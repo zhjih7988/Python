@@ -2,7 +2,7 @@
 from urllib import request
 from bs4 import BeautifulSoup
 
-def getResponse(Url):
+def getHtmlSoup(Url):
     '''
     get Url Response
     '''
@@ -17,7 +17,7 @@ def getResponse(Url):
 
 def SaveToHtml(Url,Path):
     '''
-    解析Url,存成html
+    解析Url,存成html,返回soup
     '''
     try:
         headers = {
@@ -32,6 +32,7 @@ def SaveToHtml(Url,Path):
             fw.write(soup.prettify())
     except:
         print("Error")
+
 
 if __name__ == '__main__':
     SaveToHtml('','')
