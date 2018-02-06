@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 # https://github.com/rg3/youtube-dl/blob/master/README.md#readme
-# Regular Expression 
+# Regular Expression
 '''
 . 代表任何一个字符（包括它本身）
 + 前面一个字符或一个子表达式重复一遍或者多遍
@@ -17,12 +17,14 @@
 '''
 import re
 
+
 def main():
-    str = r"<html><body><h1>hello world<h1></body></html>"#这段是你要匹配的文本
-    p1 = r"(?<=<h1>).+?(?=<h1>)" #正则表达式规则
-    pattern1 = re.compile(p1) #编译这段正则表达式
-    matcher1 = re.search(pattern1,str)#在源文本中搜索符合正则表达式的部分
-    print(matcher1.group())#打印出来
+    str = r"<html><body><h1>hello world<h1></body></html>"  # 这段是你要匹配的文本
+    p1 = r"(?<=<h1>).+?(?=<h1>)"  # 正则表达式规则
+    pattern1 = re.compile(p1)  # 编译这段正则表达式
+    matcher1 = re.search(pattern1, str)  # 在源文本中搜索符合正则表达式的部分
+    print(matcher1.group())  # 打印出来
+
 
 if __name__ == '__main__':
     main()
