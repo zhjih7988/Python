@@ -12,16 +12,14 @@ email = email.get_attribute('value')
 print(email)
 
 #打开邮箱页面后，我发现，邮箱的内容是以iframe的形式展现的，所以，这地方要处理一下：
-driver.switch_to_frame(driver.find_element_by_id('ifmail'))
+# driver.switch_to_frame(driver.find_element_by_id('ifmail'))
 try:
-    html = driver.find_element_by_id('mailmillieu')
+    html = driver.find_element_by_id('login')
 except Exception as e:
     input('遇到机器识别的问题，切换到浏览器点击一下，验证完敲一下回车')
-    html = driver.find_element_by_id('mailmillieu')
+    html = driver.find_element_by_id('login')
 html = html.text
-active_url = html.split('account:')[1].strip()
-driver.get(active_url)
-time.sleep(1)
-
+print(html)
+# active_url = html.split('account:')[1].strip()
 driver.delete_all_cookies()
 time.sleep(1)
