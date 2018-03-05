@@ -9,7 +9,8 @@ import os
 
 def Clawer(url):
     html_source = etreeHTML(url,"Utf-8")
-    source = html_source.xpath('/html/body/div[2]/div[5]/p/text()')
+    source = html_source.xpath('/html/body/div[2]/div[5]/text()')
+    print(source)
     title = html_source.xpath('/html/body/div[2]/div[4]/div[2]/h1/text()')
     path = 'BiliBili_Article/'
     file_dir = path + "".join(title) + '''\\'''
@@ -25,11 +26,11 @@ def Clawer(url):
 if __name__ == '__main__':
     filename = "input.txt"
     http = 'https://www.bilibili.com/read/cv'
-    # url = 'https://www.bilibili.com/read/cv251313'
-    # Clawer(url)
-    if os.path.exists(filename):
-        with open(filename, 'r', encoding="utf-8") as f:
-            for line in f:
-                url = http + line.strip('\n')
-                print(url + " ...")
-                Clawer(url)
+    url = 'https://www.bilibili.com/read/cv252460'
+    Clawer(url)
+    # if os.path.exists(filename):
+    #     with open(filename, 'r', encoding="utf-8") as f:
+    #         for line in f:
+    #             url = http + line.strip('\n')
+    #             print(url + " ...")
+    #             Clawer(url)

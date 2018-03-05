@@ -1,5 +1,4 @@
-本文档仅作为视频学习过程中的参考
-不可用于非法途径
+
 '''
 目标网址：http://web2.qq.com/
 程序目的：实现简单的QQ群发功能
@@ -10,7 +9,7 @@ V:1.0
 import time
 # 1:使用web浏览器自动化框架，实现登陆
 import selenium.webdriver
-driver = selenium.webdriver.Safari()
+driver = selenium.webdriver.Chrome()
 login_url = "http://web2.qq.com/"
 driver.get(login_url)
 input("Please press enter to continue.")

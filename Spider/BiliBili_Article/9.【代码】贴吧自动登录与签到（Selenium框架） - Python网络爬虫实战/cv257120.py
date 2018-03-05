@@ -1,5 +1,4 @@
-本文档仅作为视频学习过程中的参考
-不可用于非法途径
+
 '''
 目标网址：https://tieba.baidu.com/index.html?traceid=#
 程序目的：模拟登陆百度贴吧
