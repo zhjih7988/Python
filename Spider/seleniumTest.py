@@ -3,13 +3,15 @@ from selenium import webdriver
 import os  
 import time
 from selenium.webdriver.common.by import By
-from selenium.webdriver import ActionChains
+# from selenium.webdriver import ActionChains
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 # abspath = os.path.abspath(r"C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe") 
 # driver = webdriver.Chrome(abspath) 
-browser = webdriver.Chrome() 
 
+browser = webdriver.Chrome() 
 '''
 find_element_by_name
 find_element_by_id
@@ -71,13 +73,56 @@ find_element_by_css_selector
 # print(logo)
 # print(logo.text)
 
+# url = 'http://www.hao6v.com/gvod/zx.html'
+# '''
+# 获取最新的电影
+# '''
+# browser.get(url)
+# list1 = browser.find_element(By.XPATH,'//*[@id="main"]/div[1]/div/ul/li[1]/a')
+# list1 =list1.get_attribute("href")
+# print(list1)
+
+
+
 url = 'https://www.zhongziso.com/'
+wait = WebDriverWait(browser, 10)
+
+def search():
+    try:
+        browser.get(url)
+        input = wait.until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "#search"))
+            )
+        submit = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,"#topsearch > fieldset > div > div > span > button")))
+        input.send_keys('电影')
+        submit.click()
+        submit = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,"#topsearch > fieldset > div > div > span > button")))
+    except TimeoutException:
+        return search
 
 
-url = 'http://www.hao6v.com/gvod/zx.html'
-browser.get(url)
-list1 = browser.find_element(By.CSS_SELECTOR,'#main > div.col4 > div > ul')
+
+def next_page(page_number):
+    '''
+    翻页
+    '''
+    pass
 
 
-driver.delete_all_cookies()
-browser.close()
+
+
+
+
+def main():
+    total = search()
+
+
+if __name__ == '__main__':
+    main()
+
+
+
+# time.sleep(10)
+
+# browser.delete_all_cookies()
+# browser.close()

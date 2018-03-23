@@ -29,4 +29,4 @@ def getNumber(strNum):
     out = re.sub(r'[^?=第].*(?=课|讲|节)', str(AA), strNum)
     return out
 
-# print(getNumber('_自动摘要及正文抽取'))
+# print(getNumber('第十课_自动摘要及正文抽取'))
