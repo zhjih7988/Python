@@ -13,10 +13,12 @@ def getNumber(strNum):
     if len(Num[0]) == 1: # 十以内
         AA = getNum(Num[0])
     elif len(Num[0]) == 2: # 二十以内
-        # 十一
         if Num[0][:1] in k[0]: # 十
             AA = 10
         the = Num[0][-1:]
         AA = AA+getNum(the)
     out = re.sub(r'.(?=课)', str(AA), strNum)
     return out
+
+
+print(getNumber('第十二课'))
