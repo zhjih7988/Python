@@ -13,7 +13,7 @@ def getNumber(strNum):
     '''
     将中文的数字改成纯数字
     '''
-    Num = re.findall(r'第(.*?)[课|讲|节]', strNum, re.S)
+    Num = re.findall(r'第(.*?)[课|讲|节|章]', strNum, re.S)
     try:
         if len(Num[0]) == 1: # 十以内
             AA = getTen(Num[0])
@@ -26,7 +26,6 @@ def getNumber(strNum):
         return
     finally:
         pass
-    out = re.sub(r'[^?=第].*(?=课|讲|节)', str(AA), strNum)
+    out = re.sub(r'[^?=第].*(?=课|讲|节|章)', str(AA), strNum)
     return out
-
 # print(getNumber('第十课_自动摘要及正文抽取'))
