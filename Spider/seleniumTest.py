@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from selenium.common.exceptions import TimeoutException
 # abspath = os.path.abspath(r"C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe") 
 # driver = webdriver.Chrome(abspath) 
 
@@ -87,34 +87,34 @@ find_element_by_css_selector
 url = 'https://www.zhongziso.com/'
 wait = WebDriverWait(browser, 10)
 
-def search():
+def search(KEYWORD):
     try:
         browser.get(url)
         input = wait.until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "#search"))
             )
         submit = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,"#topsearch > fieldset > div > div > span > button")))
-        input.send_keys('电影')
+        input.send_keys(KEYWORD)
         submit.click()
-        submit = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,"#topsearch > fieldset > div > div > span > button")))
+        total = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,"#wrapp > div.jumbotron > div > div > ul:nth-child(4) > li:nth-child(8) > a")))
+        total = str((total.get_attribute("href"))).split("/")[-1:]
+        return total[0]
     except TimeoutException:
         return search
 
-
-
-def next_page(page_number):
-    '''
-    翻页
-    '''
-    pass
-
-
-
-
-
-
+def Operate(url):
+    try:
+        browser.get(url)
+    except TimeoutException:
+        return Operate
+    
 def main():
-    total = search()
+    KEYWORD = '电影'
+    total = search(KEYWORD)
+    print(total)
+    newURL = 'https://www.zhongziso.com/list/'+ KEYWORD
+    for i in range(1,int(total)):
+        Operate(newURL+'/'+str(i))
 
 
 if __name__ == '__main__':
