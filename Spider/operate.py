@@ -26,7 +26,7 @@ def main():
     # path=r"C:\Users\Pancras\Desktop\课件"
     # path = r'G:\安全\渗透教程\最新Kali渗透'
     # path = r'G:\fundamental  algorithms\12、程序猿的内功修炼，学好算法与数据结构'
-    path = r'G:\CS\19、高性能可扩展MySQL数据库设计及架构优化 电商项目\高性能可扩展mysql'
+    # path = r'G:\CS\19、高性能可扩展MySQL数据库设计及架构优化 电商项目\高性能可扩展mysql'
     openPath(path)
 
 
