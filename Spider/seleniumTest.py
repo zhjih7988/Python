@@ -8,7 +8,11 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+<<<<<<< HEAD
 from pyquery import PyQuery as pq
+=======
+from selenium.common.exceptions import TimeoutException
+>>>>>>> ec979ffb3b87e3215cf6b2684bdd42c03dd3fe2a
 # abspath = os.path.abspath(r"C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe") 
 # driver = webdriver.Chrome(abspath) 
 
@@ -85,6 +89,7 @@ find_element_by_css_selector
 
 
 
+<<<<<<< HEAD
 # url = 'https://www.zhongziso.com/'
 # wait = WebDriverWait(browser, 10)
 #
@@ -148,6 +153,39 @@ def main():
             for line in f:
                 word = line.strip('\n')
                 search(word)
+=======
+url = 'https://www.zhongziso.com/'
+wait = WebDriverWait(browser, 10)
+
+def search(KEYWORD):
+    try:
+        browser.get(url)
+        input = wait.until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "#search"))
+            )
+        submit = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,"#topsearch > fieldset > div > div > span > button")))
+        input.send_keys(KEYWORD)
+        submit.click()
+        total = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,"#wrapp > div.jumbotron > div > div > ul:nth-child(4) > li:nth-child(8) > a")))
+        total = str((total.get_attribute("href"))).split("/")[-1:]
+        return total[0]
+    except TimeoutException:
+        return search
+
+def Operate(url):
+    try:
+        browser.get(url)
+    except TimeoutException:
+        return Operate
+    
+def main():
+    KEYWORD = '电影'
+    total = search(KEYWORD)
+    print(total)
+    newURL = 'https://www.zhongziso.com/list/'+ KEYWORD
+    for i in range(1,int(total)):
+        Operate(newURL+'/'+str(i))
+>>>>>>> ec979ffb3b87e3215cf6b2684bdd42c03dd3fe2a
 
 
 if __name__ == '__main__':

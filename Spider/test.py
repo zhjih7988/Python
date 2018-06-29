@@ -1,41 +1,23 @@
-# coding: utf-8
-import time
-import datetime
-from pymouse import PyMouse
-
-def GetPosition():
-    while 1==1:
-        m = PyMouse()
-        tmp = m.position()
-        print(tmp)
-        time.sleep(2)
-
-# 利用python实现对鼠标的移动点击操作
-def ClickScreen(x, y, minute):
-    m = PyMouse()
-    m.position()  # 获取当前坐标的位置
-    minute = datetime.datetime.now().minute + minute
-    while True:
-        i = datetime.datetime.now()
-        # h = i.hour
-        min = i.minute
-        if min < minute:
-            # m.click(1087,730)
-            m.click(x, y)
-            time.sleep(1)
-        else:
-            break
-        #取消
-        # m.click(1146, 245)
-# m.move(x,y)#鼠标移动到xy位置
-# m.click(x,y)#移动并且在xy位置点击
-# m.click(x,y,1|2)#移动并且在xy位置点击,左右键点击
+#coding = utf-8
+import re
+import base64
+from urllib import parse
+from urllib import request
+import os
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 UBrowser/6.1.2716.5 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+}
 
 
-if __name__ == '__main__':
-    x = 726
-    y = 225
-    m = PyMouse()
-    m.position()  # 获取当前坐标的位置
-    for i in range(1,50):
-        m.click(x, y)
+url = "https://www.javbus.cc/KMI-064"
+
+req = request.Request(url=url, headers=headers)
+res = request.urlopen(req)
+ret = res.read().decode("utf-8")
+
+# x_p = r'onclick="window.open(\'(.*?)\'\,\'_self\')\">'
+x_p='<table id="magnet-table" class="table table-condensed table-striped table-hover" style="margin-bottom:0;">.*?(.*?) </table>'
+x_p='<a style="color:#333".*? href="(.*?)">.*?</a>'
+magnetCode = re.findall(x_p, ret, re.S)
+print(magnetCode)
