@@ -1,8 +1,9 @@
+#coding = utf-8
 import re
 import base64
 from urllib import parse
 from urllib import request
-import time, os
+import os
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 UBrowser/6.1.2716.5 Safari/537.36",
@@ -70,6 +71,8 @@ def getInfo(word):
 
 if __name__ == '__main__':
     filename = "input.txt"
+    with open('STorrent.txt', 'w', encoding="utf-8") as f:
+        f.write("")
     if os.path.exists(filename):
         with open(filename, 'r', encoding="utf-8") as f:
             for line in f:

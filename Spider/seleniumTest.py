@@ -2,12 +2,13 @@
 from selenium import webdriver  
 import os  
 import time
+import re
 from selenium.webdriver.common.by import By
 # from selenium.webdriver import ActionChains
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from pyquery import PyQuery as pq
 # abspath = os.path.abspath(r"C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe") 
 # driver = webdriver.Chrome(abspath) 
 
@@ -84,37 +85,69 @@ find_element_by_css_selector
 
 
 
-url = 'https://www.zhongziso.com/'
-wait = WebDriverWait(browser, 10)
+# url = 'https://www.zhongziso.com/'
+# wait = WebDriverWait(browser, 10)
+#
+# def search():
+#     try:
+#         browser.get(url)
+#         input = wait.until(
+#             EC.presence_of_element_located((By.CSS_SELECTOR, "#search"))
+#             )
+#         submit = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,"#topsearch > fieldset > div > div > span > button")))
+#         input.send_keys('电影')
+#         submit.click()
+#         submit = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,"#topsearch > fieldset > div > div > span > button")))
+#     except TimeoutException:
+#         return search
+#
 
-def search():
+
+# def next_page(page_number):
+#     '''
+#     翻页
+#     '''
+#     pass
+
+
+wait = WebDriverWait(browser, 3)
+
+def search(KEYWORD):
+    url = 'https://www.javbus.cc/'
+    url = url + KEYWORD
     try:
+        print(url)
         browser.get(url)
-        input = wait.until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "#search"))
-            )
-        submit = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,"#topsearch > fieldset > div > div > span > button")))
-        input.send_keys('电影')
-        submit.click()
-        submit = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,"#topsearch > fieldset > div > div > span > button")))
+        wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#magnet-table")))
+        html = browser.page_source
+        doc = pq(html)
+        table = doc("#magnet-table")
+        table = str(table)
+        Magnet = re.findall(r'width="70%" onclick="window.open\(\'(.*?)&amp;', table, re.S)
+        with open('Torrent.txt', 'a', encoding="utf-8") as f:
+            for i in Magnet:
+                f.write(i+"\n")
+
+        # for item in table('tr'):        #     # 这个循环循环多次,item是html的对象
+        #     print(item)
+        # print(doc("#magnet-table"))
+        # for item in doc("#magnet-table").items():
+        #     print(item)
     except TimeoutException:
-        return search
+        return
+    finally:
+        return
 
-
-
-def next_page(page_number):
-    '''
-    翻页
-    '''
+def getMagnet():
     pass
 
-
-
-
-
-
 def main():
-    total = search()
+    filename = "main.txt"
+    if os.path.exists(filename):
+        with open(filename, 'r', encoding="utf-8") as f:
+            for line in f:
+                word = line.strip('\n')
+                search(word)
 
 
 if __name__ == '__main__':
